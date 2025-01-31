@@ -1,6 +1,9 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Mira {
+    private static String[] list;
+
     public static void line() {
         System.out.println("____________________________________________________________");
     }
@@ -20,22 +23,39 @@ public class Mira {
         line();
     }
 
-    public static void echo(String command) {
+    public static void addTask(String command) {
         line();
-        System.out.println(command);
+        System.out.println("Task added " + command);
+        int idx = list.length;
+        String[] newList = Arrays.copyOf(list, idx+1);
+        newList[idx] = command;
+        list = newList;
+        line();
+    }
+
+    public static void printList() {
+        line();
+        if (list.length == 0) {
+            System.out.println("No tasks found.");
+        } else {
+            System.out.println("Here are the tasks in your list: ");
+            for (int i = 1; i < list.length + 1; i++) {
+                System.out.println(i + "." + list[i - 1]);
+            }
+        }
         line();
     }
 
     public static void main(String[] args) {
         intro();
-
+        list = new String[0];
         Scanner input = new Scanner(System.in);
         while (true) {
             String command = input.nextLine();
-            if (command.equals("bye")) {
-                exit();
-            } else {
-                echo(command);
+            switch (command) {
+                case "bye": exit(); break;
+                case "list": printList(); break;
+                default: addTask(command);
             }
         }
     }
