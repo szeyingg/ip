@@ -11,21 +11,19 @@ public class Mira {
     public static void intro() {
         line();
         System.out.print("""
-                Hello! I'm Mira
-                What can I do for you?
+                Greetings! I'm Mira, your enchanted task-keeper!
+                What wonders would you like to accomplish today?
                 """);
         line();
     }
 
     public static void exit() {
-        line();
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("And... Poof! I'm off~ But don’t worry, I’m just a spell away!");
         line();
     }
 
     public static void addTask(String command) {
-        line();
-        System.out.println("Task added " + command);
+        System.out.println("New task conjured: " + command);
         int idx = list.length;
         String[] newList = Arrays.copyOf(list, idx+1);
         newList[idx] = command;
@@ -34,11 +32,10 @@ public class Mira {
     }
 
     public static void printList() {
-        line();
         if (list.length == 0) {
-            System.out.println("No tasks found.");
+            System.out.println("Hmm, your list is empty... Use your powers to conjure a task!");
         } else {
-            System.out.println("Here are the tasks in your list: ");
+            System.out.println("Abra-Cadabra! Here's your task list:");
             for (int i = 1; i < list.length + 1; i++) {
                 System.out.println(i + "." + list[i - 1]);
             }
