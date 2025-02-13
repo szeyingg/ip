@@ -15,11 +15,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    public void markAsUndone() {
-        this.isDone = false;
+    public void setDone(boolean isDone){
+        this.isDone = isDone;
     }
 }

@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Mira {
-    private static Task[] list;
+    private static Task[] tasks;
     private static int listLength;
 
     public static void line() {
@@ -30,8 +30,8 @@ public class Mira {
     }
 
     public static void addTodo(String command) {
-        list[listLength] = new Todo(command);
-        reportTaskAdded(list[listLength]);
+        tasks[listLength] = new Todo(command);
+        reportTaskAdded(tasks[listLength]);
         listLength++;
     }
 
@@ -44,8 +44,8 @@ public class Mira {
             String description = command.substring(0, byIndex);
             String by = command.substring(byIndex + 5);
 
-            list[listLength] = new Deadline(description, by);
-            reportTaskAdded(list[listLength]);
+            tasks[listLength] = new Deadline(description, by);
+            reportTaskAdded(tasks[listLength]);
             listLength++;
         }
     }
@@ -61,8 +61,8 @@ public class Mira {
             String from = command.substring(fromIndex + 7, toIndex);
             String to = command.substring(toIndex + 5);
 
-            list[listLength] = new Event(description, from, to);
-            reportTaskAdded(list[listLength]);
+            tasks[listLength] = new Event(description, from, to);
+            reportTaskAdded(tasks[listLength]);
             listLength++;
         }
     }
@@ -74,7 +74,7 @@ public class Mira {
         } else {
             System.out.println("Abra-Cadabra! Here's your task list:");
             for (int i = 1; i < listLength + 1; i++) {
-                Task t = list[i-1];
+                Task t = tasks[i-1];
                 System.out.print(i + ".");
                 System.out.println(t);
             }
@@ -83,22 +83,22 @@ public class Mira {
 
     public static void markTask(String num) {
         int idx = Integer.parseInt(num);
-        Task t = list[idx - 1];
-        t.markAsDone();
+        Task t = tasks[idx - 1];
+        t.setDone(true);
         System.out.println("Presto, you did it! Task " + idx + " has been conquered!");
     }
 
     public static void unmarkTask(String num) {
         int idx = Integer.parseInt(num);
-        Task t = list[idx -1];
-        t.markAsUndone();
+        Task t = tasks[idx -1];
+        t.setDone(false);
         System.out.println("Tough luck! Task " + idx + " has come back stronger!");
     }
 
 
     public static void main(String[] args) {
         intro();
-        list = new Task[100];
+        tasks = new Task[100];
         listLength = 0;
 
         Scanner input = new Scanner(System.in);
@@ -112,14 +112,13 @@ public class Mira {
             String param = (command.length > 1) ? command[1] : ""; //empty if no param
 
             switch (action) {
-                case "bye": exit(); break;
-                case "list": printList(); break;
-                case "todo": addTodo(param); break;
-                case "deadline": addDeadline(param); break;
-                case "event": addEvent(param); break;
-                case "mark": markTask(param); break;
-                case "unmark": unmarkTask(param); break;
-                default: System.out.println("Oh no... seems like your spell " + action + " failed, try another?");
+                case "bye" -> exit();
+                case "list" -> printList();
+                case "todo" -> addTodo(param);
+                case "deadline" -> addDeadline(param);
+                case "event" -> addEvent(param);
+                case "mark" -> markTask(param);
+                case "unmark" -> unmarkTask(param);
             }
             line();
         }
