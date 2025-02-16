@@ -1,3 +1,5 @@
+package mira.text;
+
 public class Text {
 
     public static final String LINE = "____________________________________________________________";

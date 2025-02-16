@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import mira.task.*;
+import mira.text.*;
 
 public class Mira {
-    public static int MAX_TASKS = 100;
-    public static Task[] tasks = new Task[MAX_TASKS];;
+    public static final int MAX_TASKS = 100;
+    public static final Task[] tasks = new Task[MAX_TASKS];
     public static int listLength = 0;
 
     public static void intro() {
@@ -16,6 +18,7 @@ public class Mira {
         System.exit(0);
     }
 
+    //TODO: move functions into classes
     public static void reportTaskAdded(Task t) {
         System.out.println("Ta-da! A new task has been conjured: ");
         System.out.println(t);
@@ -71,6 +74,22 @@ public class Mira {
         }
     }
 
+    public static void markTask(String num) {
+        int idx = Integer.parseInt(num);
+        Task t = tasks[idx - 1];
+        t.setDone(true);
+        System.out.println("Presto, you did it! Task " + idx + " has been conquered!");
+        System.out.println(t);
+    }
+
+    public static void unmarkTask(String num) {
+        int idx = Integer.parseInt(num);
+        Task t = tasks[idx -1];
+        t.setDone(false);
+        System.out.println("Tough luck! Task " + idx + " has come back stronger!");
+        System.out.println(t);
+    }
+
     public static void main(String[] args) {
         intro();
         Scanner input = new Scanner(System.in);
@@ -90,12 +109,12 @@ public class Mira {
                 case "todo" -> addTodo(param);
                 case "deadline" -> addDeadline(param);
                 case "event" -> addEvent(param);
-                case "mark" -> Task.markTask(param);
-                case "unmark" -> Task.unmarkTask(param);
+                case "mark" -> markTask(param);
+                case "unmark" -> unmarkTask(param);
                 case "help" -> System.out.println(Text.COMMAND_LIST);
                 default -> System.out.println(Text.INVALID_COMMAND + "\n" + Text.HELP);
             }
-            System.out.println(Text.LINE);;
+            System.out.println(Text.LINE);
         }
     }
 }
