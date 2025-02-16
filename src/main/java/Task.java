@@ -18,4 +18,20 @@ public class Task {
     public void setDone(boolean isDone){
         this.isDone = isDone;
     }
+
+    public static void markTask(String num) {
+        int idx = Integer.parseInt(num);
+        Task t = Mira.tasks[idx - 1];
+        t.setDone(true);
+        System.out.println("Presto, you did it! Task " + idx + " has been conquered!");
+        System.out.println(t);
+    }
+
+    public static void unmarkTask(String num) {
+        int idx = Integer.parseInt(num);
+        Task t = Mira.tasks[idx -1];
+        t.setDone(false);
+        System.out.println("Tough luck! Task " + idx + " has come back stronger!");
+        System.out.println(t);
+    }
 }
