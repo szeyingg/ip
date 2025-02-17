@@ -10,4 +10,8 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public static void addTodo(String command) {
+        Task.addTask(new Todo(command));
+    }
 }
