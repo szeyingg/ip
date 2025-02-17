@@ -1,5 +1,7 @@
 package mira.task;
 
+import mira.exception.EmptyListException;
+import mira.exception.MissingParamException;
 import mira.text.Text;
 
 public class Task {
@@ -23,13 +25,13 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public void setDone(boolean isDone){
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
-    public static void addTask(Task task){
+    public static void addTask(Task task) {
         if (listLength >= MAX_TASKS) {
-            System.out.println("Oops! Task list is full.");
+            System.out.println(Text.LIST_FULL);
             return;
         }
         tasks[listLength] = task;
@@ -43,32 +45,48 @@ public class Task {
         System.out.println("Phew! A total of " + (listLength + 1) + " magical tasks awaits you!");
     }
 
-    public static void printList() {
+    public static void printList() throws EmptyListException {
         if (listLength == 0) {
-            System.out.println(Text.LIST_EMPTY);
+            throw new EmptyListException();
         } else {
-            System.out.println("Abra-Cadabra! Here's your task list:");
+            System.out.println(Text.PRINT_LIST);
             for (int i = 1; i < listLength + 1; i++) {
-                Task t = tasks[i-1];
+                Task t = tasks[i - 1];
                 System.out.print(i + ".");
                 System.out.println(t);
             }
         }
     }
 
-    public static void markTask(String num) {
-        int idx = Integer.parseInt(num);
-        Task t = tasks[idx - 1];
-        t.setDone(true);
-        System.out.println("Presto, you did it! Task " + idx + " has been conquered!");
-        System.out.println(t);
+    public static void markTask(String num) throws EmptyListException, MissingParamException {
+        updateTaskStatus(num, true);
     }
 
-    public static void unmarkTask(String num) {
-        int idx = Integer.parseInt(num);
-        Task t = tasks[idx -1];
-        t.setDone(false);
-        System.out.println("Tough luck! Task " + idx + " has come back stronger!");
-        System.out.println(t);
+    public static void unmarkTask(String num) throws EmptyListException, MissingParamException {
+        updateTaskStatus(num, false);
+    }
+
+    private static void updateTaskStatus(String num, boolean isDone) throws EmptyListException, MissingParamException {
+        if (listLength == 0) {
+            throw new EmptyListException();
+        }
+        if (num.isEmpty()) {
+            throw new MissingParamException();
+        }
+        try {
+            int idx = Integer.parseInt(num);
+            if (idx <= 0 || idx > listLength) {
+                throw new NumberFormatException();
+            }
+            Task t = tasks[idx - 1];
+            t.setDone(isDone);
+
+            String actionText = isDone ? "conquered" : "come back stronger";
+            System.out.print(isDone ? "Presto, you did it! " : "Tough luck! ");
+            System.out.println("Task " + idx + " has " + actionText + "!");
+            System.out.println(t);
+        } catch (NumberFormatException e) {
+            System.out.println(Text.INVALID_PARAM_MARK + num);
+        }
     }
 }

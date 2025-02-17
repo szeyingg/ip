@@ -1,6 +1,6 @@
 package mira.task;
 
-import mira.text.Text;
+import mira.exception.*;
 
 public class Event extends Task {
 
@@ -18,15 +18,15 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
-    public static void addEvent(String command) {
-    String[] parts = command.split(" /from | /to ", 3);
+    public static void addEvent(String command) throws MissingParamException {
+        String[] parts = command.split(" /from | /to ", 3);
         if (parts.length != 3) {
-        System.out.println(Text.MISSING_PARAM + "\n" + Text.HELP);
-    } else {
-        String description = parts[0];
-        String from = parts[1];
-        String to = parts[2];
-        Task.addTask(new Event(description, from, to));
+            throw new MissingParamException();
+        } else {
+            String description = parts[0];
+            String from = parts[1];
+            String to = parts[2];
+            Task.addTask(new Event(description, from, to));
         }
     }
 }
