@@ -42,7 +42,7 @@ public class Task {
     public static void reportTaskAdded(Task t) {
         System.out.println("Ta-da! A new task has been conjured: ");
         System.out.println(t);
-        System.out.println("Phew! A total of " + (listLength + 1) + " magical tasks awaits you!");
+        System.out.println(Text.LIST_SIZE_1 + (listLength + 1) + Text.LIST_SIZE_2);
     }
 
     public static void printList() throws EmptyListException {
@@ -88,5 +88,36 @@ public class Task {
         } catch (NumberFormatException e) {
             System.out.println(Text.INVALID_PARAM_MARK + num);
         }
+    }
+
+    //TODO: implement ArrayList collection
+    public static void deleteTask(String num) throws EmptyListException, MissingParamException {
+        if (listLength == 0) {
+            throw new EmptyListException();
+        }
+        if (num.isEmpty()) {
+            throw new MissingParamException();
+        }
+        try {
+            int idx = Integer.parseInt(num) - 1;
+            if (idx < 0 || idx >= listLength) {
+                throw new NumberFormatException();
+            }
+            reportTaskDeleted(tasks[idx]);
+            while (idx < listLength - 1) {
+                tasks[idx] = tasks[idx + 1];
+                idx++;
+            }
+            tasks[listLength - 1] = null;
+            listLength--;
+        } catch (NumberFormatException e) {
+            System.out.println(Text.INVALID_PARAM_MARK + num);
+        }
+    }
+
+    public static void reportTaskDeleted(Task t) {
+        System.out.println("And...Poof! The task vanishes into thin air: ");
+        System.out.println(t);
+        System.out.println(Text.LIST_SIZE_1 + (listLength + 1) + Text.LIST_SIZE_2);
     }
 }
