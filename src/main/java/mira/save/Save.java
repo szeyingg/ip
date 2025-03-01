@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import mira.task.*;
 import mira.exception.*;
+import mira.text.*;
 
 public class Save {
     public static final String FILE_PATH = "./data/MiraTasks.txt";
@@ -24,7 +25,8 @@ public class Save {
         }
     }
 
-    public static void loadTasks() throws  InvalidSaveException {
+    public static void loadTasks() {
+        System.out.println(Text.TASK_LOADING);
         checkFile();
         try {
             Scanner s = new Scanner(new File(FILE_PATH));
@@ -34,48 +36,57 @@ public class Save {
             }
         } catch (IOException e) {
             System.out.println("FILE_READ_ERROR");
+        } catch (InvalidSaveException e) {
+            System.out.println(Text.INVALID_SAVE_FORMAT);
         }
     }
 
     public static void convertToTask(String line) throws InvalidSaveException {
-        String[] parts = line.split("\\| ");
-        String taskType = parts[0];
-        String isDone = parts[1];
-        String description = parts[2];
+        String[] parts = line.split(" \\| ");
 
-        if (isDone.isEmpty() || description.isEmpty()) {
+        if (parts.length < 3) {
             throw new InvalidSaveException();
         }
+        String taskType = parts[0];
+        String description = parts[2];
 
+        boolean isDone = switch (parts[1]) {
+            case "1" -> true;
+            case "0" -> false;
+            default -> throw new InvalidSaveException();
+        };
+
+        Task t;
         switch (taskType) {
             case "T":
-                new Todo(description);
+                t = new Todo(description, isDone);
                 break;
 
             case "D":
                 if (parts.length != 4) {
                     throw new InvalidSaveException();
                 }
-                new Deadline(description, parts[3]);
+                t = new Deadline(description, isDone, parts[3]);
                 break;
 
             case "E":
                 if (parts.length != 5) {
                     throw new InvalidSaveException();
                 }
-                new Event(description, parts[3], parts[4]);
+                t = new Event(description, isDone, parts[3], parts[4]);
                 break;
 
             default:
                 throw new InvalidSaveException();
         }
+        Task.tasks.add(t);
     }
 
-    public static void saveTasks(Task[] tasks) {
+    public static void saveTasks() {
         checkFile();
         try {
             FileWriter fw = new FileWriter(FILE_PATH, false);
-            for (Task t : tasks) {
+            for (Task t : Task.tasks) {
                 fw.write(t.convertToFile());
             }
             fw.close();

@@ -7,8 +7,9 @@ public class Event extends Task {
     protected String from;
     protected String to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, boolean isDone, String from, String to) {
         super(description);
+        this.isDone = isDone;
         this.from = from;
         this.to = to;
     }
@@ -26,12 +27,12 @@ public class Event extends Task {
             String description = parts[0];
             String from = parts[1];
             String to = parts[2];
-            Task.addTask(new Event(description, from, to));
+            Task.addTask(new Event(description, false, from, to));
         }
     }
 
     @Override
     public String convertToFile(){
-        return "E" + super.convertToFile() + " | " + from + " | " + to;
+        return "E" + super.convertToFile() + " | " + from + " | " + to + "\n";
     }
 }

@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import mira.save.Save;
 import mira.task.*;
 import mira.text.*;
 import mira.exception.*;
@@ -14,6 +15,9 @@ public class Mira {
     public static void main(String[] args) {
         System.out.println(Text.LINE + "\n" + Text.INTRO + "\n" + Text.LINE);
         Scanner input = new Scanner(System.in);
+
+        Save.loadTasks();
+        System.out.println(Text.LINE);
 
         while (true) {
             System.out.print(Text.PENDING_INPUT);
@@ -37,6 +41,7 @@ public class Mira {
                     case "delete" -> Task.deleteTask(param);
                     default -> throw new InvalidCommandException();
                 }
+                Save.saveTasks();
             } catch (MissingParamException e) {
                 System.out.println(Text.MISSING_PARAM + "\n" + Text.HELP);
             } catch (InvalidCommandException e) {

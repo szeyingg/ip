@@ -6,8 +6,9 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, boolean isDone, String by) {
         super(description);
+        this.isDone = isDone;
         this.by = by;
     }
 
@@ -23,12 +24,12 @@ public class Deadline extends Task {
         } else {
             String description = parts[0];
             String by = parts[1];
-            Task.addTask(new Deadline(description, by));
+            Task.addTask(new Deadline(description, false, by));
         }
     }
 
     @Override
     public String convertToFile(){
-        return "D" + super.convertToFile() + " | " + by;
+        return "D" + super.convertToFile() + " | " + by + "\n";
     }
 }

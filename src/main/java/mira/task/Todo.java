@@ -1,11 +1,11 @@
 package mira.task;
 import mira.exception.*;
-import mira.text.*;
 
 public class Todo extends Task {
 
-    public Todo(String description) {
+    public Todo(String description, boolean isDone) {
         super(description);
+        this.isDone = isDone;
     }
 
     @Override
@@ -17,11 +17,11 @@ public class Todo extends Task {
         if (command.isEmpty()) {
             throw new MissingParamException();
         }
-        Task.addTask(new Todo(command));
+        Task.addTask(new Todo(command, false));
     }
 
     @Override
     public String convertToFile(){
-        return "T" + super.convertToFile();
+        return "T" + super.convertToFile() + "\n";
     }
 }
