@@ -23,6 +23,7 @@ public class Mira {
             String action = command[0];
             String param = (command.length > 1) ? command[1] : ""; //empty if no param
 
+            System.out.print(Text.LINE_BUFFER + "\n");
             try {
                 switch (action) {
                     case "bye" -> exit();
