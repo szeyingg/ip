@@ -113,4 +113,8 @@ public class Task {
         System.out.println(t);
         System.out.println(Text.LIST_SIZE_1 + (tasks.size()-1) + Text.LIST_SIZE_2);
     }
+
+    public String convertToFile(){
+        return " | " + (isDone ? "1" : "0") + " | " + description;
+    }
 }

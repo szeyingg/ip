@@ -26,4 +26,9 @@ public class Deadline extends Task {
             Task.addTask(new Deadline(description, by));
         }
     }
+
+    @Override
+    public String convertToFile(){
+        return "D" + super.convertToFile() + " | " + by;
+    }
 }

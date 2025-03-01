@@ -29,4 +29,9 @@ public class Event extends Task {
             Task.addTask(new Event(description, from, to));
         }
     }
+
+    @Override
+    public String convertToFile(){
+        return "E" + super.convertToFile() + " | " + from + " | " + to;
+    }
 }
