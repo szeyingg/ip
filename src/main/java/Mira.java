@@ -1,10 +1,10 @@
 import java.util.Scanner;
+
 import mira.task.*;
 import mira.text.*;
 import mira.exception.*;
 
 public class Mira {
-
 
     public static void exit() {
         System.out.println(Text.BYE + "\n" + Text.LINE);
@@ -23,6 +23,7 @@ public class Mira {
             String action = command[0];
             String param = (command.length > 1) ? command[1] : ""; //empty if no param
 
+            System.out.print(Text.LINE_BUFFER + "\n");
             try {
                 switch (action) {
                     case "bye" -> exit();
@@ -33,6 +34,7 @@ public class Mira {
                     case "mark" -> Task.markTask(param);
                     case "unmark" -> Task.unmarkTask(param);
                     case "help" -> System.out.println(Text.COMMAND_LIST);
+                    case "delete" -> Task.deleteTask(param);
                     default -> throw new InvalidCommandException();
                 }
             } catch (MissingParamException e) {
