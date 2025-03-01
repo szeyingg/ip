@@ -19,4 +19,9 @@ public class Todo extends Task {
         }
         Task.addTask(new Todo(command));
     }
+
+    @Override
+    public String convertToFile(){
+        return "T" + super.convertToFile();
+    }
 }

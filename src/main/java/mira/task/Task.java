@@ -89,4 +89,8 @@ public class Task {
             System.out.println(Text.INVALID_PARAM_MARK + num);
         }
     }
+
+    public String convertToFile(){
+        return " | " + (isDone ? "1" : "0") + " | " + description;
+    }
 }
