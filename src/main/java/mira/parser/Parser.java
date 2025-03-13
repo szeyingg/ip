@@ -21,6 +21,7 @@ public class Parser {
                 case "unmark" -> tasks.unmarkTask(param);
                 case "help" -> System.out.println(Text.COMMAND_LIST);
                 case "delete" -> tasks.deleteTask(param);
+                case "find" -> tasks.findTask(param);
                 default -> throw new InvalidCommandException();
             }
         } catch (MissingParamException e) {

@@ -105,4 +105,27 @@ public class TaskList {
         System.out.println(t);
         System.out.println(Text.LIST_SIZE_1 + (tasks.size()-1) + Text.LIST_SIZE_2);
     }
+
+    public void findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        ArrayList<Integer> foundIndices = new ArrayList<>();
+
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            if (tasks.get(i-1).description.contains(keyword)) {
+                foundTasks.add(tasks.get(i-1));
+                foundIndices.add(i);
+            }
+        }
+
+        if (foundTasks.isEmpty()) {
+            System.out.println(Text.SEARCH_NOT_FOUND);
+        } else {
+            System.out.println(Text.SEARCH_FOUND);
+            for (int i = 1; i < foundTasks.size() + 1; i++) {
+                System.out.print(foundIndices.get(i-1) + ". ");
+                Task t = foundTasks.get(i-1);
+                System.out.println(t);
+            }
+        }
+    }
 }
