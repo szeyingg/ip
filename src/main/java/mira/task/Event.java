@@ -19,18 +19,6 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
-    public static void addEvent(String command) throws MissingParamException {
-        String[] parts = command.split(" /from | /to ", 3);
-        if (parts.length != 3) {
-            throw new MissingParamException();
-        } else {
-            String description = parts[0];
-            String from = parts[1];
-            String to = parts[2];
-            Task.addTask(new Event(description, false, from, to));
-        }
-    }
-
     @Override
     public String convertToFile(){
         return "E" + super.convertToFile() + " | " + from + " | " + to + "\n";

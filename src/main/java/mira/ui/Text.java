@@ -1,4 +1,4 @@
-package mira.text;
+package mira.ui;
 
 public class Text {
 
@@ -40,6 +40,7 @@ public class Text {
     public static final String INVALID_PARAM_MARK = "Zzzt! Can't seem to find task number: ";
 
     //save related messages
+    public static final String FILE_PATH = "./data/MiraTasks.txt";
     public static final String INVALID_SAVE_FORMAT = "Eek! Seems like monsters damaged some of your saved tasks!";
     public static final String TASK_LOADING = "Rekindling your past tasks... cast \"list\" to take a glimpse!";
 }

@@ -7,13 +7,17 @@ import java.util.Scanner;
 
 import mira.task.*;
 import mira.exception.*;
-import mira.text.*;
+import mira.ui.Text;
 
-public class Save {
-    public static final String FILE_PATH = "./data/MiraTasks.txt";
+public class Storage {
+    public final String filePath; //= Text.FILE_PATH;
 
-    public static void checkFile() {
-        File f = new File(FILE_PATH);
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void checkFile() {
+        File f = new File(filePath);
         if (f.exists()) {
             return;
         }
@@ -25,23 +29,24 @@ public class Save {
         }
     }
 
-    public static void loadTasks() {
-        System.out.println(Text.TASK_LOADING);
+    public TaskList loadTasks() {
         checkFile();
+        TaskList tasks = new TaskList();
         try {
-            Scanner s = new Scanner(new File(FILE_PATH));
+            Scanner s = new Scanner(new File(filePath));
             while (s.hasNextLine()) {
                 String line = s.nextLine();
-                convertToTask(line);
+                convertToTask(line, tasks);
             }
         } catch (IOException e) {
             System.out.println("FILE_READ_ERROR");
         } catch (InvalidSaveException e) {
             System.out.println(Text.INVALID_SAVE_FORMAT);
         }
+        return tasks;
     }
 
-    public static void convertToTask(String line) throws InvalidSaveException {
+    private void convertToTask(String line, TaskList tasks) throws InvalidSaveException {
         String[] parts = line.split(" \\| ");
 
         if (parts.length < 3) {
@@ -79,14 +84,14 @@ public class Save {
             default:
                 throw new InvalidSaveException();
         }
-        Task.tasks.add(t);
+        tasks.addTask(t, true);
     }
 
-    public static void saveTasks() {
+    public void saveTasks(TaskList tasks) {
         checkFile();
         try {
-            FileWriter fw = new FileWriter(FILE_PATH, false);
-            for (Task t : Task.tasks) {
+            FileWriter fw = new FileWriter(filePath, false);
+            for (Task t : tasks.getTasks()) {
                 fw.write(t.convertToFile());
             }
             fw.close();

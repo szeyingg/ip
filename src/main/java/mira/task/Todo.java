@@ -13,13 +13,6 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    public static void addTodo(String command) throws MissingParamException{
-        if (command.isEmpty()) {
-            throw new MissingParamException();
-        }
-        Task.addTask(new Todo(command, false));
-    }
-
     @Override
     public String convertToFile(){
         return "T" + super.convertToFile() + "\n";
