@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
-    private Ui ui;
+    private Ui ui = new Ui();
     public static final int MAX_TASKS = 100;
 
     public TaskList() {
@@ -127,6 +127,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks in task list that contains searched keyword
+     *
+     * @param keyword Input string to search for
+     */
     public void findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         ArrayList<Integer> foundIndices = new ArrayList<>();

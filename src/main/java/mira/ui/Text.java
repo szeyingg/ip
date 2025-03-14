@@ -12,7 +12,7 @@ public class Text {
     //general messages
     public static final String INTRO = """
             Greetings! I'm Mira, your enchanted task-keeper!
-            \\(='_'=)--*
+            \\(='u'=)--*
             Looking forward to the wonders you would accomplish today!""";
     public static final String BYE = "Whoosh! I'm off~ But don't worry, I'm just a spell away!";
     public static final String PENDING_INPUT = """
@@ -32,15 +32,16 @@ public class Text {
               ====================
               MIRA Book of Spells:
               ====================
-            1. list                          | displays list of tasks
-            2. todo <description>            | adds todo task to list
-            3. deadline /by <deadline>       | adds deadline task to list
-            4. event /from <start> /to <end> | adds event task to list
-            5. mark <list number>            | marks task as done
-            6. unmark <list number>          | marks task as undone
-            7. delete <list number>          | deletes task from list
-            8. find <keyword>                | finds task(s) in list with keyword
-            9. bye                           | closes program""";
+            1. list -------------------------------------- | displays list of tasks
+            2. todo <description> ------------------------ | adds todo task to list
+            3. deadline <description> /by <deadline> ----- | adds deadline task to list
+            4. event <description> /from <start> /to <end> | adds event task to list
+            5. mark <list index> ------------------------- | marks task as done
+            6. unmark <list index> ----------------------- | marks task as undone
+            7. delete <list index> ----------------------- | deletes task from list
+            8. find <keyword> ---------------------------- | finds task(s) in list with keyword
+            9. help -------------------------------------- | displays this list of commands
+            9. bye --------------------------------------- | closes program""";
 
     //error messages
     public static final String INVALID_COMMAND = "Oh no... That spell didnt work, try something else?";
