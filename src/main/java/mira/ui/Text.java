@@ -1,21 +1,25 @@
 package mira.ui;
 
+/**
+ * Deals with all text outputs.
+ */
 public class Text {
 
+    //decorative borders
     public static final String LINE = "*......*......*......*......*......*......*......*......*......*";
     public static final String LINE_BUFFER = "  *------------------------------------------------------------*";
 
+    //general messages
     public static final String INTRO = """
             Greetings! I'm Mira, your enchanted task-keeper!
             \\(='_'=)--*
             Looking forward to the wonders you would accomplish today!""";
     public static final String BYE = "Whoosh! I'm off~ But don't worry, I'm just a spell away!";
-
     public static final String PENDING_INPUT = """
             What spell would you like to cast?
             --*\040""";
 
-    //command messages
+    //command related messages
     public static final String HELP = "Cast \"help\" if you wish to refer to your book of spells!";
     public static final String PRINT_LIST = "Abra-Cadabra! Here's your task list:";
     public static final String LIST_SIZE_1 =  "Phew! A total of ";
@@ -23,6 +27,7 @@ public class Text {
     public static final String SEARCH_NOT_FOUND = "Echoes of nothingness... No traces of such magic found.";
     public static final String SEARCH_FOUND = "Woohoo! I have traced the magic to the following tasks:";
 
+    //list of commands
     public static final String COMMAND_LIST = """
               ====================
               MIRA Book of Spells:
@@ -34,7 +39,8 @@ public class Text {
             5. mark <list number>            | marks task as done
             6. unmark <list number>          | marks task as undone
             7. delete <list number>          | deletes task from list
-            8. bye                           | closes program""";
+            8. find <keyword>                | finds task(s) in list with keyword
+            9. bye                           | closes program""";
 
     //error messages
     public static final String INVALID_COMMAND = "Oh no... That spell didnt work, try something else?";
