@@ -29,7 +29,7 @@ public class Mira {
             ui.showPendingInput();
             String in = input.nextLine();
 
-            ui.showBufferLine();
+            ui.showBuffer();
             Parser.parseCommand(in, tasks, ui);
             storage.saveTasks(tasks);
             ui.showLine();

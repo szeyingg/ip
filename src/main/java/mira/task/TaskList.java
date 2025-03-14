@@ -91,10 +91,10 @@ public class TaskList {
             Task t = tasks.get(i - 1);
             t.setDone(isDone);
 
-            String actionText = isDone ? "been conquered" : "come back stronger";
-            System.out.print(isDone ? "Presto, you did it! " : "Tough luck! ");
-            System.out.println("Task " + i + " has " + actionText + "!");
-            System.out.println(t);
+            System.out.print(isDone ? Text.MARK_1 : Text.UNMARK_1);
+            String actionText = isDone ? Text.MARK_2: Text.UNMARK_2;
+            System.out.println("Task " + i + " has " + actionText);
+            System.out.println("> " + t);
         } catch (NumberFormatException e) {
             System.out.println(Text.INVALID_PARAM_MARK + num);
         }

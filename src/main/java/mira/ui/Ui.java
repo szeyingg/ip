@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Ui {
     public void showWelcome() {
-        System.out.println(Text.LINE + "\n" + Text.INTRO + "\n" + Text.LINE);
+        System.out.println(Text.LINE + "\n" + Text.INTRO + "\n");
         System.out.println(Text.TASK_LOADING + "\n" + Text.LINE);
     }
 
@@ -22,8 +22,8 @@ public class Ui {
         System.out.println(Text.LINE);
     }
 
-    public void showBufferLine() {
-        System.out.println(Text.LINE_BUFFER);
+    public void showBuffer() {
+        System.out.println(" ");
     }
 
     public void exit() {
@@ -39,7 +39,7 @@ public class Ui {
      */
     public void reportTaskAdded(Task t, ArrayList<Task> tasks) {
         System.out.println("Ta-da! A new task has been conjured: ");
-        System.out.println(t);
+        System.out.println("> " + t);
         System.out.println(Text.LIST_SIZE_1 + (tasks.size()) + Text.LIST_SIZE_2);
     }
 
@@ -51,7 +51,7 @@ public class Ui {
      */
     public void reportTaskDeleted(Task t, ArrayList<Task> tasks) {
         System.out.println("And...Poof! The task vanishes into thin air: ");
-        System.out.println(t);
+        System.out.println("> " + t);
         System.out.println(Text.LIST_SIZE_1 + (tasks.size()-1) + Text.LIST_SIZE_2);
     }
 }
