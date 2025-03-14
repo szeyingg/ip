@@ -4,6 +4,9 @@ import mira.task.*;
 import mira.exception.*;
 import mira.ui.*;
 
+/**
+ * Parses user input to execute respective commands
+ */
 public class Parser {
     public static void parseCommand(String input, TaskList tasks, Ui ui) {
         String[] command = input.split(" ", 2);
@@ -32,15 +35,29 @@ public class Parser {
         }
     }
 
-    public static void addTodo(String command, TaskList tasks) throws MissingParamException{
-        if (command.isEmpty()) {
+    /**
+     * Adds {@code Todo} object to task list
+     *
+     * @param param Input string that corresponds to description of task
+     * @param tasks ArrayList of tasks
+     * @throws MissingParamException If input is missing description
+     */
+    public static void addTodo(String param, TaskList tasks) throws MissingParamException{
+        if (param.isEmpty()) {
             throw new MissingParamException();
         }
-        tasks.addTask(new Todo(command, false), false);
+        tasks.addTask(new Todo(param, false), false);
     }
 
-    public static void addDeadline(String command, TaskList tasks) throws MissingParamException {
-        String[] parts = command.split(" /by ", 2);
+    /**
+     * Adds {@code Deadline} object to task list.
+     *
+     * @param param Input string consisting of description and deadline of task
+     * @param tasks ArrayList of tasks
+     * @throws MissingParamException If input is missing description or deadline
+     */
+    public static void addDeadline(String param, TaskList tasks) throws MissingParamException {
+        String[] parts = param.split(" /by ", 2);
         if (parts.length != 2) {
             throw new MissingParamException();
         } else {
@@ -50,8 +67,15 @@ public class Parser {
         }
     }
 
-    public static void addEvent(String command, TaskList tasks) throws MissingParamException {
-        String[] parts = command.split(" /from | /to ", 3);
+    /**
+     * Adds {@code Event} object to task list.
+     *
+     * @param param Input string consisting of description, start and end of event
+     * @param tasks ArrayList of tasks
+     * @throws MissingParamException If input is missing description, start, or end
+     */
+    public static void addEvent(String param, TaskList tasks) throws MissingParamException {
+        String[] parts = param.split(" /from | /to ", 3);
         if (parts.length != 3) {
             throw new MissingParamException();
         } else {

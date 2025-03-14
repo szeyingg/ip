@@ -1,7 +1,9 @@
 package mira.task;
 
-import mira.exception.*;
-
+/**
+ * Represents tasks with a set duration.
+ * A {@code Event} object is a task with a description, start, and end.
+ */
 public class Event extends Task {
 
     protected String from;

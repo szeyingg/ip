@@ -5,6 +5,9 @@ import mira.exception.MissingParamException;
 import mira.ui.Text;
 import java.util.ArrayList;
 
+/**
+ * Parent class of all {@code Task} objects
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

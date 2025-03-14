@@ -5,6 +5,10 @@ import mira.save.Storage;
 import mira.task.*;
 import mira.ui.*;
 
+/**
+ * Main class for running of Mira program.
+ * Deals with initialisation and user input.
+ */
 public class Mira {
 
     private Storage storage;

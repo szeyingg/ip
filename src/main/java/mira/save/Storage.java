@@ -9,13 +9,20 @@ import mira.task.*;
 import mira.exception.*;
 import mira.ui.Text;
 
+/**
+ * Deals with storage of task data in file
+ * Contains methods to save, load, check, and convert task data
+ */
 public class Storage {
-    public final String filePath; //= Text.FILE_PATH;
+    public final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Checks if file exists in file path, creates new file otherwise
+     */
     public void checkFile() {
         File f = new File(filePath);
         if (f.exists()) {
@@ -29,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks saved in text file.
+     *
+     * @return list of loaded tasks
+     */
     public TaskList loadTasks() {
         checkFile();
         TaskList tasks = new TaskList();
@@ -46,6 +58,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Converts line of text into {@code Task} objects
+     *
+     * @param line Text string saved in text file
+     * @param tasks ArrayList for generated task to be stored in
+     * @throws InvalidSaveException If saved text is not in expected format
+     */
     private void convertToTask(String line, TaskList tasks) throws InvalidSaveException {
         String[] parts = line.split(" \\| ");
 
@@ -87,6 +106,11 @@ public class Storage {
         tasks.addTask(t, true);
     }
 
+    /**
+     * Saves task list as a text file
+     *
+     * @param tasks ArrayList of tasks to be saved
+     */
     public void saveTasks(TaskList tasks) {
         checkFile();
         try {

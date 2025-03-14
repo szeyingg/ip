@@ -2,12 +2,17 @@ package mira.task;
 
 import mira.exception.EmptyListException;
 import mira.exception.MissingParamException;
-import mira.ui.Text;
+import mira.ui.*;
 
 import java.util.ArrayList;
 
+/**
+ * Represents list of tasks.
+ * Contains methods to add, delete, print, mark or unmark tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
+    private Ui ui;
     public static final int MAX_TASKS = 100;
 
     public TaskList() {
@@ -18,6 +23,12 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Adds task to task list, reports the addition if task is added manually.
+     *
+     * @param task {@code Task} object to be added to list
+     * @param isFromStorage Boolean to indicate if task is added automatically from storage
+     */
     public void addTask(Task task, boolean isFromStorage) {
         if (tasks.size() >= MAX_TASKS) {
             System.out.println(Text.LIST_FULL);
@@ -26,16 +37,15 @@ public class TaskList {
         tasks.add(task);
 
         if (!isFromStorage) {
-            reportTaskAdded(task);
+            ui.reportTaskAdded(task, tasks);
         }
     }
 
-    public void reportTaskAdded(Task t) {
-        System.out.println("Ta-da! A new task has been conjured: ");
-        System.out.println(t);
-        System.out.println(Text.LIST_SIZE_1 + (tasks.size()) + Text.LIST_SIZE_2);
-    }
-
+    /**
+     * Prints full task list with indices.
+     *
+     * @throws EmptyListException If task list is empty
+     */
     public void printList() throws EmptyListException {
         if (tasks.isEmpty()) {
             throw new EmptyListException();
@@ -57,6 +67,15 @@ public class TaskList {
         updateTaskStatus(num, false);
     }
 
+    /**
+     * Marks task as done or undone.
+     *
+     * @param num Input string with index of task to be updated
+     * @param isDone Boolean to indicate status of task to set to
+     * @throws EmptyListException If task list is empty
+     * @throws MissingParamException If input number is missing
+     * @throws NumberFormatException If input is not a valid number
+     */
     private void updateTaskStatus(String num, boolean isDone) throws EmptyListException, MissingParamException {
         if (tasks.isEmpty()) {
             throw new EmptyListException();
@@ -81,6 +100,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes task from task list.
+     *
+     * @param num Input string with index of task to be deleted
+     * @throws EmptyListException If task list is empty
+     * @throws MissingParamException If input number is missing
+     * @throws NumberFormatException If input is not a valid number
+     */
     public void deleteTask(String num) throws EmptyListException, MissingParamException {
         if (tasks.isEmpty()) {
             throw new EmptyListException();
@@ -93,16 +120,10 @@ public class TaskList {
             if (i < 0 || i >= tasks.size()) {
                 throw new NumberFormatException();
             }
-            reportTaskDeleted(tasks.get(i));
+            ui.reportTaskDeleted(tasks.get(i), tasks);
             tasks.remove(i);
         } catch (NumberFormatException e) {
             System.out.println(Text.INVALID_PARAM_MARK + num);
         }
-    }
-
-    public void reportTaskDeleted(Task t) {
-        System.out.println("And...Poof! The task vanishes into thin air: ");
-        System.out.println(t);
-        System.out.println(Text.LIST_SIZE_1 + (tasks.size()-1) + Text.LIST_SIZE_2);
     }
 }

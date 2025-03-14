@@ -1,7 +1,9 @@
 package mira.task;
 
-import mira.exception.*;
-
+/**
+ * Represents tasks with a deadline.
+ * A {@code Deadline} object is a task with a description and deadline.
+ */
 public class Deadline extends Task {
 
     protected String by;
