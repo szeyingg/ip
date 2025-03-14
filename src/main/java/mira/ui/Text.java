@@ -24,6 +24,8 @@ public class Text {
     public static final String PRINT_LIST = "Abra-Cadabra! Here's your task list:";
     public static final String LIST_SIZE_1 =  "Phew! A total of ";
     public static final String LIST_SIZE_2 = " magical tasks awaits you!";
+    public static final String SEARCH_NOT_FOUND = "Echoes of nothingness... No traces of such magic found.";
+    public static final String SEARCH_FOUND = "Woohoo! I have traced the magic to the following tasks:";
 
     //list of commands
     public static final String COMMAND_LIST = """

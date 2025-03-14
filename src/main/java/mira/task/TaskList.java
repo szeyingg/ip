@@ -126,4 +126,27 @@ public class TaskList {
             System.out.println(Text.INVALID_PARAM_MARK + num);
         }
     }
+
+    public void findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        ArrayList<Integer> foundIndices = new ArrayList<>();
+
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            if (tasks.get(i-1).description.contains(keyword)) {
+                foundTasks.add(tasks.get(i-1));
+                foundIndices.add(i);
+            }
+        }
+
+        if (foundTasks.isEmpty()) {
+            System.out.println(Text.SEARCH_NOT_FOUND);
+        } else {
+            System.out.println(Text.SEARCH_FOUND);
+            for (int i = 1; i < foundTasks.size() + 1; i++) {
+                System.out.print(foundIndices.get(i-1) + ". ");
+                Task t = foundTasks.get(i-1);
+                System.out.println(t);
+            }
+        }
+    }
 }
